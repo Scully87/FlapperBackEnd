@@ -49,9 +49,15 @@ app.factory('posts', ['$http', function ($http){
     o.upvote = function(post) {
         return $http.put('/posts/' + post._id + '/upvote')
         .success(function(data){
-            post.upvotes += 1;
+            post.votes += 1;
         });
     };
+    o.downvote = function(post) {
+        return $http.put('/posts/' + post._id + '/downvote')
+        .success(function(data){
+            post.votes -= 1;
+        });
+    };    
     o.get = function(id) {
         return $http.get('/posts/' + id).then(function(res){
           return res.data;
@@ -63,9 +69,15 @@ app.factory('posts', ['$http', function ($http){
     o.upvoteComment = function(post, comment) {
         return $http.put('/posts/' + post._id + '/comments/'+ comment._id + '/upvote')
             .success(function(data){
-                comment.upvotes += 1;
+                comment.votes += 1;
             });
-    };    
+    };
+    o.downvoteComment = function(post, comment) {
+        return $http.put('/posts/' + post._id + '/comments/'+ comment._id + '/downvote')
+            .success(function(data){
+                comment.votes += 1;
+            });
+    };      
     return o;
 }])
 
@@ -91,9 +103,13 @@ function($scope, posts){
         
     };
     
-    $scope.incrementUpvotes = function(post) {
+    $scope.upvote = function(post) {
         posts.upvote(post);
     }
+
+    $scope.downvote = function(post) {
+        posts.downvote(post);
+    }   
 
 }])
 
@@ -114,7 +130,10 @@ function ($scope, posts, post){
         });
         $scope.body = '';
     };
-    $scope.incrementUpvotes = function(comment){
+    $scope.upvote = function(comment){
         posts.upvoteComment(post, comment);
+    };
+    $scope.downvote = function(comment){
+        posts.downvoteComment(post, comment);
     };
 }]);
