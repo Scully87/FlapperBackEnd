@@ -8,10 +8,10 @@ function($stateProvider, $urlRouterProvider) {
 //before the state finishes loading.
   $stateProvider
     .state('home', {
-      url: '/home',
-      templateUrl: '/home.html',
-      controller: 'MainCtrl',
-      resolve: {
+        url: '/home',
+        templateUrl: '/home.html',
+        controller: 'MainCtrl',
+        resolve: {
           postPromise: ['posts', function (posts) {
               return posts.getAll();
           }]
@@ -21,6 +21,11 @@ function($stateProvider, $urlRouterProvider) {
         url: '/posts/{id}',
         templateUrl: '/posts.html',
         controller: 'PostsCtrl'
+        resolve: {
+          post: ['$stateParams', 'posts', function($stateParams, posts) {
+            return posts.get($stateParams.id);
+          }]
+        }
     });
   $urlRouterProvider.otherwise('home');
 }])
@@ -45,6 +50,11 @@ app.factory('posts', ['$http', function ($http){
         return $http.put('/posts/' + post._id + '/upvote')
         .success(function(data){
             post.upvotes += 1;
+        });
+    };
+    o.get = function(id) {
+        return $http.get('/posts/' + id).then(function(res){
+          return res.data;
         });
     };    
     return o;
