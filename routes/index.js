@@ -82,4 +82,15 @@ router.post('/posts/:post/comments', function (req, res, next) {
     });
 });
 
+router.get('/posts/:post/comments', function(req, res) {
+    res.json(req.post.comments);
+});
+
+router.put('/posts/:post/comments/:comment/upvote', function(req, res, next) {
+    req.comment.upvote(function(err, comment) {
+        if (err) { return next(err); }
+        res.json(comment);
+    });
+});
+
 module.exports = router;
