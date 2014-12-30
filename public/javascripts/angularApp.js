@@ -12,19 +12,19 @@ function($stateProvider, $urlRouterProvider) {
         templateUrl: '/home.html',
         controller: 'MainCtrl',
         resolve: {
-          postPromise: ['posts', function (posts) {
-              return posts.getAll();
-          }]
-      }
+            postPromise: ['posts', function (posts) {
+                return posts.getAll();
+            }]
+        }
     })
     .state('posts', {
         url: '/posts/{id}',
         templateUrl: '/posts.html',
-        controller: 'PostsCtrl'
+        controller: 'PostsCtrl',
         resolve: {
-          post: ['$stateParams', 'posts', function($stateParams, posts) {
-            return posts.get($stateParams.id);
-          }]
+            post: ['$stateParams', 'posts', function ($stateParams, posts) {
+                return posts.get($stateParams.id);
+            }]
         }
     });
   $urlRouterProvider.otherwise('home');
@@ -90,8 +90,8 @@ function($scope, posts){
 
 app.controller('PostsCtrl', [
 '$scope',
-'$stateParams',
 'posts',
-function ($scope, $stateParams, posts){
-    $scope.post = posts.posts[$stateParams.id];
+'post',
+function ($scope, posts, post){
+    $scope.post = post;
 }]);
