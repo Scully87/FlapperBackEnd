@@ -17,6 +17,10 @@ a.ng-binding {
 	color: #ffffff;
 }
 
+a {
+	color: #ffffff;
+}
+
 span.post-title {
 	font-size: 20px;
 	margin-left: 10px;
