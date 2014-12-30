@@ -63,6 +63,10 @@ app.factory('posts', ['$http', function ($http){
           return res.data;
         });
     };
+    o.delete = function(post) {
+          Post.delete(post)
+          _.remove($scope.posts, post)
+        }
     o.addComment = function(id, comment) {
         return $http.post('/posts/' + id + '/comments', comment);
     };
