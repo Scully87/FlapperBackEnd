@@ -9,13 +9,7 @@ var app = express();
 
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://127.0.0.1/news', function(err,db){
-    if (!err){
-        console.log('Connected to /news!');
-    }else{
-        console.dir(err); //failed to connect
-    }
-});
+mongoose.connect('mongodb://localhost/news');
 
 require('./models/Posts');
 require('./models/Comments');
