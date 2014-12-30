@@ -20,12 +20,18 @@ app.config([
     }
 ]);
 
-app.factory('posts', [function(){
+app.factory('posts', ['$http', function($http){
 		var o = {
 			posts: []
 		};
 		return o;
 }])
+
+o.getAll = function() {
+    return $http.get('/posts').success(function(data){
+        angular.copy(data, o.posts);
+    });
+};
 
 app.controller('MainCtrl', ['$scope','posts',
     function($scope, posts) {
