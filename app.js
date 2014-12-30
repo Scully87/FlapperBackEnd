@@ -8,6 +8,8 @@ var cool = require('cool-ascii-faces');
 
 var app = express();
 
+app.set('port', (process.env.PORT || 5000))
+
 var mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/news');
@@ -36,9 +38,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 
-app.set('port', (process.env.PORT || 5000))
 app.get('/', function(request, response) {
-  response.send(cool());
+  response.render('index');
 });
 app.listen(app.get('port'), function() {
   console.log("Node app is running at localhost:" + app.get('port'))
