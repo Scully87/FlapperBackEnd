@@ -1,10 +1,11 @@
 body {
 	background-color: #222924;
 	color: #286090;
+	margin-bottom: 10px;
 }
 .col-md-6 {
 	margin-left: 25%;
-	margin-right: 20%;
+	margin-right: 25%;
 }
 
 span.post-title {
