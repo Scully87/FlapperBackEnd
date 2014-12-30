@@ -55,9 +55,7 @@ router.param('post', function(req, res, next, id) {
 });
 
 router.get('/posts/:post', function (req, res) {
-
     req.post.populate('comments', function (err, post) {
-
         res.json(req.post);
     });
 });
