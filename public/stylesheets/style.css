@@ -1,6 +1,6 @@
 body {
 	background-color: #222924;
-	color: #23527C;
+	color: #286090;
 }
 .col-md-6 {
 	margin-left: 25%;
@@ -26,9 +26,9 @@ form.add-comment {
 }
 
 .glyphicon-thumbs-up {
-	color: #23527C;
+	color: #286090;
 }
 
 .glyphicon-thumbs-down {
-	color: #23527C;
+	color: #286090;
 }
