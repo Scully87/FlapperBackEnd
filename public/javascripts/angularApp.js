@@ -56,6 +56,9 @@ app.factory('posts', ['$http', function ($http){
         return $http.get('/posts/' + id).then(function(res){
           return res.data;
         });
+    };
+    o.addComment = function(id, comment) {
+        return $http.post('/posts/' + id + '/comments', comment);
     };    
     return o;
 }])
@@ -94,4 +97,15 @@ app.controller('PostsCtrl', [
 'post',
 function ($scope, posts, post){
     $scope.post = post;
+
+    $scope.addComment = function () {
+        if ($scope.body === '') { return; }
+        posts.addComment(post._id, {
+            body: $scope.body,
+            author: 'user',
+        }).success(function (comment) {
+            $scope.post.comments.push(comment);
+        });
+        $scope.body = '';
+    };
 }]);
