@@ -33,6 +33,11 @@ Install the dependencies:
 $ npm install
 ```
 
+Run the database:
+```shell
+$ mongod
+```
+
 Run the server:
 ```shell
 $ npm start
