@@ -52,7 +52,7 @@ router.param('comment', function (req, res, next, id) {
     });
 });
 
-router.get('/posts/:post', function(req, res, next) {
+router.get('/posts/:post', function(req, res) {
       req.post.populate('comments', function(err, post) {
 
         res.json(post);
@@ -83,7 +83,7 @@ router.post('/posts/:post/comments', function(req, res, next) {
     if(err){ return next(err); }
 
     req.post.comments.push(comment);
-    req.post.save(function(err, post) {
+    req.post.save(function(err) {
       if(err){ return next(err); }
 
       res.json(comment);
